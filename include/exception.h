@@ -11,31 +11,32 @@ struct exception_frame{
 	jmp_buf env;
 	const char *file;
 	int line;
-	const exception_t *exception;
+	const exception *exception;
 };
 enum { exception_entered=0, exception_raised,
        exception_handled,   exception_finalized };
 extern exception_frame *_Ex_stack_top;
+void exception_raise(const exception *e, const char *file, int line);
 #define	RAISE(e)	exception_raise(&(e), __FILE__, __LINE__)
-#define RERAISE		exception_raise(exception_frame.exception, exception_frame.file, exception_frame.line)
-#define RETURN		switch (_Ex_stack = _Ex_stack->prev,0) default:return
+#define RERAISE		exception_raise(_Ex_frame.exception, _Ex_frame.file, _Ex_frame.line)
+#define RETURN		switch (_Ex_stack_top = _Ex_stack_top->prev,0) default:return
 #define TRY \
 	do{\
 		volatile int _Ex_flag;\
-		exception_Frame _Ex_frame;\
+		exception_frame _Ex_frame;\
 		_Ex_frame.prev = _Ex_stack_top;\
 		_Ex_stack_top = &_Ex_frame;\
 		_Ex_flag = setjmp(_Ex_frame.env);\
 		if (_Ex_flag == exception_entered){
 #define EXCEPT(e) \
 			if(_Ex_flag == exception_entered)\
-				_Ex_stack = _Exstack->prev;\
+				_Ex_stack_top = _Ex_stack_top->prev;\
 		}\
 		else if(_Ex_frame.exception == &(e)){\
 			_Ex_flag = exception_handled;
 #define ELSE \
 			if(_Ex_flag == exception_entered)\
-					_Ex_stack = _Exstack->prev;\
+					_Ex_stack_top = _Exstack_top->prev;\
 		}\
 		else{\
 			_Ex_flag = exception_handled;
@@ -45,7 +46,7 @@ extern exception_frame *_Ex_stack_top;
 		}\
 		{\
 			if(_Ex_flag == exception_entered)\
-				_Ex_flag = exception_finalized;\
+				_Ex_flag = exception_finalized;
 #define END_TRY \
 			if(_Ex_flag == exception_entered)\
 				_Ex_flag = exception_handled;\
@@ -53,6 +54,6 @@ extern exception_frame *_Ex_stack_top;
 		if (_Ex_flag == exception_raised)\
 			RERAISE;\
 	}while(0)
-void exception_raise(const Exception_t *e, const char *file, int line);
+
 
 #endif
