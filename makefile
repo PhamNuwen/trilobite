@@ -8,8 +8,14 @@ AR = ar ruv
 
 exception.o :
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/exception.c 
+assert.o :
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/assert.c 
+mem.o :
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/mem.c 
 
-OBJS = exception.o
+OBJS = exception.o\
+	assert.o\
+	mem.o
 
 
 trilib::	$(OBJS)

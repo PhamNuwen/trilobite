@@ -7,7 +7,6 @@ exception_frame *_Ex_stack_top = NULL;
 
 void exception_raise(const exception *e, const char *file, int line){
 	exception_frame *p = _Ex_stack_top;
-	assert(e);
 	if (p==NULL){
 		fprintf(stderr, "Uncaught exception");
 		if (e->reason)
