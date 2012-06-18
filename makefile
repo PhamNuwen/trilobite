@@ -1,6 +1,6 @@
 CC = gcc
 LD = gcc
-CFLAGS = -g -Wall -Iinclude
+CFLAGS = -g -Wall -Iinclude -std=c99
 LFLAGS =
 SRC = src
 INCLUDE = include
@@ -20,6 +20,10 @@ list.o:
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/list.c 
 table.o:
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/table.c
+arith.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/arith.c
+set.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/set.c
 
 OBJS = atom.o\
 	exception.o\
@@ -27,7 +31,9 @@ OBJS = atom.o\
 	mem.o\
 	arena.o\
 	list.o\
-	table.o
+	table.o\
+	arith.o\
+	set.o
 
 
 trilib::	$(OBJS)
@@ -35,6 +41,7 @@ trilib::	$(OBJS)
 
 clean::
 	rm -f *.o
+	rm -r *.a
 
 test::		trilib
 	$(CC) $(CFLAGS) -c -o test_main.o tst/test_main.c
