@@ -3,10 +3,10 @@
 #include "exception.h"
 #include "assert.h"
 
-exception_frame *_Ex_stack_top = NULL;
+exception_frame_t *_Ex_stack_top = NULL;
 
-void exception_raise(const exception *e, const char *file, int line){
-	exception_frame *p = _Ex_stack_top;
+void exception_raise(const exception_t *e, const char *file, int line){
+	exception_frame_t *p = _Ex_stack_top;
 	if (p==NULL){
 		fprintf(stderr, "Uncaught exception");
 		if (e->reason)

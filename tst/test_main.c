@@ -2,8 +2,8 @@
 #include "assert.h"
 #include <stdio.h>
 
-exception aaa={"No Money"};
-exception bbb={"Still No Money"};
+exception_t aaa={"No Money"};
+exception_t bbb={"Still No Money"};
 
 int f(){
 	RAISE(aaa);

@@ -4,7 +4,7 @@
 #include "exception.h"
 #include "mem.h"
 
-const exception Mem_Fail={"Memory Allocation Failed"};
+const exception_t Mem_Fail={"Memory Allocation Failed"};
 
 void *mem_alloc(long size, const char *file, int line){
 	void *ptr;

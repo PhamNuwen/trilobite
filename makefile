@@ -6,16 +6,28 @@ SRC = src
 INCLUDE = include
 AR = ar ruv
 
+atom.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/atom.c
 exception.o :
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/exception.c 
 assert.o :
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/assert.c 
 mem.o :
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/mem.c 
+arena.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/arena.c 
+list.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/list.c 
+table.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/table.c
 
-OBJS = exception.o\
+OBJS = atom.o\
+	exception.o\
 	assert.o\
-	mem.o
+	mem.o\
+	arena.o\
+	list.o\
+	table.o
 
 
 trilib::	$(OBJS)
