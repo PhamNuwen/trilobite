@@ -24,6 +24,12 @@ arith.o:
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/arith.c
 set.o:
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/set.c
+array.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/array.c
+seq.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/seq.c
+fmt.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/fmt.c
 
 OBJS = atom.o\
 	exception.o\
@@ -33,7 +39,10 @@ OBJS = atom.o\
 	list.o\
 	table.o\
 	arith.o\
-	set.o
+	set.o\
+	array.o\
+	seq.o\
+	fmt.o
 
 
 trilib::	$(OBJS)
