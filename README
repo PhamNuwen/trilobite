@@ -1,6 +1,8 @@
 Trilobite is a C lib, some re-implementation based on the book "C Interfaces and Implementations"
 
 TO DO:
+Implement thread for linux x86_64
 Add stack dump to uncatch exception
 Add exception interface to Unix signal
 [Roberts, 1989]
+Implement XP AP MP

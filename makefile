@@ -30,6 +30,9 @@ seq.o:
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/seq.c
 fmt.o:
 	$(CC) $(CFLAGS) -c -o $@ $(SRC)/fmt.c
+chan.o:
+	$(CC) $(CFLAGS) -c -o $@ $(SRC)/chan.c
+
 
 OBJS = atom.o\
 	exception.o\
@@ -44,13 +47,15 @@ OBJS = atom.o\
 	seq.o\
 	fmt.o
 
+all::		$(OBJS)
+	$(AR) $@.a $(OBJS)
 
 trilib::	$(OBJS)
 	$(AR) $@.a $(OBJS)
 
 clean::
 	rm -f *.o
-	rm -r *.a
+	rm -f *.a
 
 test::		trilib
 	$(CC) $(CFLAGS) -c -o test_main.o tst/test_main.c
